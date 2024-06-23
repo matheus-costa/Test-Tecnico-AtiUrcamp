@@ -1,0 +1,74 @@
+--CRIANDO A TABELA PARTIDA
+CREATE TABLE IF NOT EXISTS public.partida
+(
+    id integer NOT NULL DEFAULT nextval('partida_id_seq'::regclass),
+    "timeA" character varying(100) COLLATE pg_catalog."default",
+    "timeB" character varying(100) COLLATE pg_catalog."default",
+    "golstimeA" integer,
+    "golstimeB" integer,
+    "horaP" time without time zone,
+    "dataP" date,
+    "rodadaP" integer,
+    CONSTRAINT partida_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.partida
+    OWNER to postgres;
+
+--SELECT    
+
+SELECT id, "timeA", "timeB", "golstimeA", "golstimeB", "horaP", "dataP", "rodadaP"
+	FROM public.partida;
+	  
+--SELECT das informações de cada time
+
+SELECT "timeA","golstimeA","horaP", "dataP", "rodadaP" FROM partida WHERE id = '5';
+
+SELECT "timeB","golstimeB","horaP", "dataP", "rodadaP" FROM partida WHERE id = '5';
+
+--VITÓRIAS EMPATES E DERROTAS
+
+--TIMEA venceu
+select "timeA","timeB","golstimeA","golstimeB" 
+      from partida
+	  where "golstimeA" > "golstimeB";
+	  
+--TIMEB venceu	  
+select "timeA","timeB","golstimeA","golstimeB" 
+      from partida
+	  where "golstimeB" > "golstimeA";
+	  
+--Empate  
+select "timeA","timeB","golstimeA","golstimeB" 
+      from partida
+	  where "golstimeA" == "golstimeB";	
+
+--Quantidade marcados GolstimeA
+select "timeA","golstimeA"
+      from partida
+	  where id = '5';
+--Quantidade marcados GolstimeB	
+select "timeB","golstimeB"
+      from partida
+	  where id = '5';
+	  
+--Saldo de GolstimeA	
+select "golstimeA" - "golstimeB"
+      from partida
+	  where id = '7';
+	  
+--Saldo de GolstimeB
+select "golstimeB" - "golstimeA"
+      from partida
+	  where id = '7';
+	  
+--Quantidade sofridos GolstimeA
+
+--Quantidade sofridos GolstimeB		  
+
+
+
+
+
